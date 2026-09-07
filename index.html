@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="uz">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Grand Barber</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css?v=1" />
+</head>
+<body data-theme="dark">
+  <div id="app">
+
+    <!-- ============ VIEW: ONBOARDING (first run) ============ -->
+    <div id="view-onboard" class="view hidden">
+      <div class="onboard">
+        <div class="brand-lockup">
+          <div class="brand-seal">GB</div>
+          <h1>GRAND BARBER</h1>
+          <p>Chinakam usta uchun mijozlar bazasi</p>
+        </div>
+        <div class="onboard-card">
+          <h2>Boshlaymiz</h2>
+          <p class="muted small">Mijozlarga SMS matnida ko'rsatiladigan telefon raqamingizni kiriting. Keyin bu ekran boshqa ko'rinmaydi.</p>
+          <input id="ob-phone" type="tel" inputmode="tel" placeholder="+998 90 123 45 67" />
+          <button id="ob-next" class="btn btn-gold btn-block">Saqlash va boshlash</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ============ VIEW: APP (main) ============ -->
+    <div id="view-app" class="view hidden">
+      <header class="topbar">
+        <div class="brand-lockup brand-top">
+          <div class="brand-seal seal-sm">GB</div>
+          <span>GRAND BARBER</span>
+        </div>
+        <button id="btn-settings-top" class="icon-btn" aria-label="Sozlama">⚙</button>
+      </header>
+
+      <main class="content" id="content">
+
+        <!-- ===== HOME ===== -->
+        <section id="panel-home" class="panel active">
+          <div class="today-bar">
+            <div class="today-label">
+              <span class="dot"></span>
+              <span id="today-date-text">Bugun</span>
+            </div>
+            <div class="today-count" id="today-count">Bugun: 0 ta mijoz keldi</div>
+          </div>
+          <div id="today-list" class="today-list"></div>
+
+          <button id="btn-add-client" class="btn btn-gold btn-block hero-add">
+            <span class="plus">+</span> Yangi mijoz qo'shish
+          </button>
+
+          <div class="stat-grid" id="home-stats"></div>
+        </section>
+
+        <!-- ===== CLIENTS ===== -->
+        <section id="panel-clients" class="panel">
+          <div class="panel-head">
+            <h2>Mijozlar</h2>
+            <button id="btn-sort" class="chip chip-sm">Sanasi</button>
+          </div>
+          <div class="search-box">
+            <input id="client-search" placeholder="Ism yoki telefon bo'yicha qidirish..." />
+          </div>
+          <div id="client-list" class="list"></div>
+        </section>
+
+        <!-- ===== STATS ===== -->
+        <section id="panel-stats" class="panel">
+          <div class="panel-head"><h2>Statistika</h2></div>
+          <div class="stat-grid two" id="stats-today"></div>
+          <div class="sub-label">Davrlar</div>
+          <div class="stat-rows" id="stats-periods"></div>
+        </section>
+
+        <!-- ===== SETTINGS ===== -->
+        <section id="panel-settings" class="panel">
+          <div class="panel-head"><h2>Sozlamalar</h2></div>
+          <div class="settings-list" id="settings-list"></div>
+        </section>
+      </main>
+
+      <nav class="tabbar" id="tabbar">
+        <button class="tab active" data-view="home"><svg class="ic" viewBox="0 0 24 24"><path d="M3 12l9-9 9 9"/><path d="M5 10v10h14V10"/></svg><span>Bosh</span></button>
+        <button class="tab" data-view="clients"><svg class="ic" viewBox="0 0 24 24"><path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg><span>Mijozlar</span></button>
+        <button class="tab" data-view="stats"><svg class="ic" viewBox="0 0 24 24"><line x1="18" y1="20" x2="18" y2="10"/><line x1="12" y1="20" x2="12" y2="4"/><line x1="6" y1="20" x2="6" y2="14"/></svg><span>Stat</span></button>
+        <button class="tab" data-view="settings"><svg class="ic" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 0 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 0 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 0 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 0 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 0 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 0 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 0 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 0 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg><span>Sozlama</span></button>
+      </nav>
+    </div>
+
+    <!-- ============ VIEW: CLIENT DETAIL ============ -->
+    <div id="view-client" class="view hidden">
+      <header class="simple-head">
+        <button id="client-back" class="icon-btn">←</button>
+        <h2 id="client-detail-name">Mijoz</h2>
+      </header>
+      <div class="content" id="client-detail-body"></div>
+    </div>
+
+    <!-- ============ VIEW: ADD / EDIT CLIENT ============ -->
+    <div id="view-form" class="view hidden">
+      <header class="simple-head">
+        <button id="form-back" class="icon-btn">←</button>
+        <h2 id="form-title">Yangi mijoz</h2>
+      </header>
+      <div class="content">
+        <form id="client-form" class="form">
+          <input type="hidden" id="f-id" />
+          <label>Ism</label>
+          <input id="f-name" placeholder="Masalan: ALISHER" required />
+          <label>Telefon raqam</label>
+          <input id="f-phone" placeholder="+998 90 123 45 67" required />
+          <label>Izoh (ixtiyoriy)</label>
+          <input id="f-note" placeholder="Masalan: soqqa bilan, qisqa" />
+
+          <label class="switch-row">
+            <span>
+              <b>Bugun keldi</b>
+              <small>Saqlash bilan birga bugungi tashrif ham yoziladi</small>
+            </span>
+            <span class="switch">
+              <input type="checkbox" id="f-today" checked />
+              <span class="slider"></span>
+            </span>
+          </label>
+
+          <div class="form-actions">
+            <button type="submit" id="form-save" class="btn btn-gold btn-block">Saqlash</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+  </div>
+
+  <div id="toast" class="toast hidden"></div>
+
+  <script src="https://telegram.org/js/telegram-web-app.js"></script>
+  <script src="js/app.js?v=1"></script>
+</body>
+</html>
