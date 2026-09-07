@@ -7,8 +7,8 @@
 
   /* ---------- config (FILL AT SETUP) ---------- */
   var CONFIG = {
-    API_URL: 'https://script.google.com/macros/s/REPLACE_WITH_WEB_APP_URL/exec',
-    TOKEN: 'REPLACE_WITH_SECRET_TOKEN'
+    API_URL: 'https://script.google.com/macros/s/AKfycbzOky1RIC8hGPd6M5P19Ebd89jw24G6WB2aJ6tCttL0IdH9Q9MFR7iJHBZxn0p_5BdgtQ/exec',
+    TOKEN: 'ab1da03e5c6b1d5fddc2863c64808f29'
   };
 
   var LS_ONBOARDED = 'gb_onboarded_v1';
