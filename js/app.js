@@ -224,13 +224,15 @@
   }
 
   function renderSettings() {
-    $('settings-list').innerHTML = [
+    var rows = [
       { label: '⏰ Eslatma kuni', value: reminderDays() + ' kun', act: 'remind' },
       { label: '📱 Telefon raqam', value: settings().barberPhone || '—', act: 'phone' },
       { label: '🌐 API holati', value: '', act: 'health' }
     ].map(function (it) {
       return '<div class="set-item" data-act="' + it.act + '"><div><b>' + it.label + '</b><small>' + it.value + '</small></div><span class="chev">›</span></div>';
     }).join('');
+    rows += '<div class="set-item set-danger" data-act="logout"><div><b>🚪 Chiqish</b><small>Boshqa telefon raqamni kiritish</small></div><span class="chev">›</span></div>';
+    $('settings-list').innerHTML = rows;
   }
 
   /* ---------- client detail ---------- */
@@ -377,6 +379,11 @@
       } catch (e) { toast(e.message); }
     } else if (act === 'health') {
       api('init').then(function () { toast('✅ Ulanish yaxshi'); }).catch(function (e) { toast('Xato: ' + e.message); });
+    } else if (act === 'logout') {
+      if (!confirm('Chiqish? Boshqa telefon raqamni kiritish uchun onboarding qayta ochiladi.')) return;
+      localStorage.removeItem(LS_ONBOARDED);
+      $('ob-phone').value = '';
+      showView('onboard');
     }
   }
 
