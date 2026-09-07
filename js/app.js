@@ -96,8 +96,13 @@
   /* ---------- views / panels ---------- */
   function showView(name) {
     var v = document.querySelectorAll('.view');
-    for (var i = 0; i < v.length; i++) v[i].classList.remove('active');
-    $('view-' + name).classList.add('active');
+    for (var i = 0; i < v.length; i++) {
+      v[i].classList.remove('active');
+      v[i].classList.add('hidden');
+    }
+    var el = $('view-' + name);
+    el.classList.remove('hidden');
+    el.classList.add('active');
   }
   function showPanel(name) {
     var p = document.querySelectorAll('.panel');
